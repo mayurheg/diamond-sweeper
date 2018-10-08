@@ -13,6 +13,11 @@
 			}
 		}
 
+		let prevSteps;
+		let nextSteps;
+		let prevFound;
+		let stepFound;
+
 		function render() {
 			let gridNo = 8;
 			let gridContainer = document.getElementById("grid_container");
@@ -28,16 +33,19 @@
 
 						this.setAttribute("close", "");
 						if (this.hasAttribute("diamond")) {
-							//this.textContent = "D";
 							this.innerHTML = "<img src='diamond-icon.png'/>";
 							diamondCounter++;
 							if (diamondCounter >= 8) {
-								// let userScore = ;
-								// document.getElementById("user_score").textContent = userScore;
 								alert("Game Over! Your score: " + getUserScore());
 							}
 						} else {
-							this.textContent = "";
+							//this.textContent = "";
+							let side = findClosestDiamond(this);
+							if (side === "prev") {
+								this.innerHTML = "<img src='prev.png'/>";
+							} else {
+								this.innerHTML = "<img src='next.png'/>";
+							}
 						}
 					}
 					gridContainer.appendChild(btnEle);
@@ -71,6 +79,48 @@
 
 		function getUserScore() {
 			return document.querySelectorAll("button:not([close])").length;
+		}
+
+		function closestPreviousDiamond(thisObj) {
+			if (thisObj.previousElementSibling) {
+				if (thisObj.previousElementSibling.hasAttribute("diamond") && !thisObj.previousElementSibling.hasAttribute("close")) {
+					prevFound = true;
+				} else {
+					prevSteps = prevSteps + 1;
+					closestPreviousDiamond(thisObj.previousElementSibling);
+				}
+			}
+		}
+
+		function closestNextDiamond(thisObj) {
+			if (thisObj.nextElementSibling) {
+				if (thisObj.nextElementSibling.hasAttribute("diamond") && !thisObj.nextElementSibling.hasAttribute("close")) {
+					nextFound = true;
+				} else {
+					nextSteps = nextSteps + 1;
+					closestNextDiamond(thisObj.nextElementSibling);
+				}
+			}
+		}
+
+		function findClosestDiamond(thisObj) {
+			prevSteps = 0;
+			nextSteps = 0;
+			prevFound = false;
+			nextFound = false;
+			closestPreviousDiamond(thisObj);
+			closestNextDiamond(thisObj);
+			if (prevFound && nextFound) {
+				if (prevSteps < nextSteps) {
+					return "prev";
+				}
+				return "next";
+			} else if (prevFound) {
+				return "prev";
+			} else {
+				return "next";
+			}
+
 		}
 	</script>
 </head>
