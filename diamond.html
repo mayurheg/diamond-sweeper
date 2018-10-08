@@ -33,7 +33,7 @@
 
 						this.setAttribute("close", "");
 						if (this.hasAttribute("diamond")) {
-							this.innerHTML = "<img src='diamond-icon.png'/>";
+							this.innerHTML = "<img src='images/diamond-icon.png'/>";
 							diamondCounter++;
 							if (diamondCounter >= 8) {
 								alert("Game Over! Your score: " + getUserScore());
@@ -42,9 +42,9 @@
 							//this.textContent = "";
 							let side = findClosestDiamond(this);
 							if (side === "prev") {
-								this.innerHTML = "<img src='prev.png'/>";
+								this.innerHTML = "<img src='images/prev.png'/>";
 							} else {
-								this.innerHTML = "<img src='next.png'/>";
+								this.innerHTML = "<img src='images/next.png'/>";
 							}
 						}
 					}
