@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Diamond sweeper game</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+	<link href="styles.css" rel="stylesheet" type="text/css" />
+	<script>
+		document.onreadystatechange = function () {
+			if (document.readyState === "complete") {
+				render();
+				addDiamonds();
+			}
+		}
+
+		function render() {
+			let gridNo = 8;
+			let gridContainer = document.getElementById("grid_container");
+			let btnIdCounter = 1;
+			let diamondCounter = 0;
+			for (let i = 0; i < gridNo; i++) {
+				for (let j = 0; j < gridNo; j++) {
+					let btnEle = document.createElement("button");
+					btnEle.textContent = "?";
+					btnEle.className = "btn diamond-btn";
+					btnEle.setAttribute("id", btnIdCounter);
+					btnEle.onclick = function (e) {
+
+						this.setAttribute("close", "");
+						if (this.hasAttribute("diamond")) {
+							//this.textContent = "D";
+							this.innerHTML = "<img src='diamond-icon.png'/>";
+							diamondCounter++;
+							if (diamondCounter >= 8) {
+								// let userScore = ;
+								// document.getElementById("user_score").textContent = userScore;
+								alert("Game Over! Your score: " + getUserScore());
+							}
+						} else {
+							this.textContent = "";
+						}
+					}
+					gridContainer.appendChild(btnEle);
+					btnIdCounter++;
+				}
+				gridContainer.appendChild(document.createElement("br"));
+			}
+		}
+
+		function addDiamonds() {
+			let randNoArr = generateUniqueRandomNo(1, 64, 8);
+			for (let randNo of randNoArr) {
+				let btnEle = document.getElementById(randNo);
+				if (btnEle) {
+					btnEle.setAttribute("diamond", "");
+				}
+			}
+		}
+
+		function generateUniqueRandomNo(min, max, count) {
+			let randNoArr = [];
+			while (randNoArr.length < count) {
+				let randNo = Math.floor(Math.random() * (max - min + 1)) + min;
+				if (randNoArr.indexOf(randNo) > -1) {
+					continue;
+				}
+				randNoArr.push(randNo);
+			}
+			return randNoArr;
+		}
+
+		function getUserScore() {
+			return document.querySelectorAll("button:not([close])").length;
+		}
+	</script>
+</head>
+
+<body>
+	<div id="grid_container" class="grid-container"></div>
+</body>
+
+</html>
