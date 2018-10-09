@@ -18,6 +18,10 @@
 		let prevFound;
 		let stepFound;
 
+		/**
+		 * Contruct 8*8 grid
+		 * @author: mayurheg@gmail.com
+		 */
 		function render() {
 
 			let gridNo = 8;
@@ -64,6 +68,9 @@
 			}
 		}
 
+		/**
+		 * Adds diamond to the grid.
+		 */
 		function addDiamonds() {
 			let randNoArr = generateUniqueRandomNo(1, 64, 8);
 			for (let randNo of randNoArr) {
@@ -74,6 +81,13 @@
 			}
 		}
 
+		/**
+		 * Generates unique random numbers between 1 to 64
+		 * @param {number} min Min value
+		 * @param {number} max Max value
+		 * @param {number} count Count of random numbers
+		 * @return {number} Unique random number
+		 */
 		function generateUniqueRandomNo(min, max, count) {
 			let randNoArr = [];
 			while (randNoArr.length < count) {
@@ -86,10 +100,19 @@
 			return randNoArr;
 		}
 
+		/**
+		 * Calculates final user score
+		 * @return {number} user score
+		 */
 		function getUserScore() {
 			return document.querySelectorAll("button:not([close])").length;
 		}
 
+		/**
+		 * Finds the closest hidden diamond before clicked square
+		 * @param {element} thisObj - clicked square html element
+		 * @return {number} steps - Number of squares between diamond and clicked square
+		 */
 		function closestPreviousDiamond(thisObj) {
 			if (thisObj.previousElementSibling) {
 				if (thisObj.previousElementSibling.hasAttribute("diamond") && !thisObj.previousElementSibling.hasAttribute("close")) {
@@ -101,6 +124,11 @@
 			}
 		}
 
+		/**
+		 * Finds the closest hidden diamond after clicked square
+		 * @param {element} thisObj - clicked square html element
+		 * @return {number} steps - Number of squares between diamond and clicked squre
+		 */
 		function closestNextDiamond(thisObj) {
 			if (thisObj.nextElementSibling) {
 				if (thisObj.nextElementSibling.hasAttribute("diamond") && !thisObj.nextElementSibling.hasAttribute("close")) {
@@ -112,6 +140,11 @@
 			}
 		}
 
+		/**
+		 * Finds the closest hidden diamond
+		 * @param {element} thisObj - clicked square html element
+		 * @return {string} prev/next
+		 */
 		function findClosestDiamond(thisObj) {
 			prevSteps = 0;
 			nextSteps = 0;
