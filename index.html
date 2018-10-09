@@ -19,19 +19,28 @@
 		let stepFound;
 
 		function render() {
+
 			let gridNo = 8;
 			let gridContainer = document.getElementById("grid_container");
 			let btnIdCounter = 1;
 			let diamondCounter = 0;
+
 			for (let i = 0; i < gridNo; i++) {
 				for (let j = 0; j < gridNo; j++) {
+
 					let btnEle = document.createElement("button");
-					btnEle.textContent = "?";
+					btnEle.innerHTML = "<img src='images/question-icon.png'/>";
 					btnEle.className = "btn diamond-btn";
 					btnEle.setAttribute("id", btnIdCounter);
 					btnEle.onclick = function (e) {
 
 						this.setAttribute("close", "");
+
+						let arrowEle = document.querySelector("img[arrow]");
+						if (arrowEle) {
+							arrowEle.remove();
+						}
+
 						if (this.hasAttribute("diamond")) {
 							this.innerHTML = "<img src='images/diamond-icon.png'/>";
 							diamondCounter++;
@@ -39,12 +48,12 @@
 								alert("Game Over! Your score: " + getUserScore());
 							}
 						} else {
-							//this.textContent = "";
+
 							let side = findClosestDiamond(this);
 							if (side === "prev") {
-								this.innerHTML = "<img src='images/prev.png'/>";
+								this.innerHTML = "<img arrow src='images/prev.png'/>";
 							} else {
-								this.innerHTML = "<img src='images/next.png'/>";
+								this.innerHTML = "<img arrow src='images/next.png'/>";
 							}
 						}
 					}
