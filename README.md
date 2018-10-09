@@ -10,9 +10,9 @@ Rules:
 4. The game ends when all diamonds are found. 
 5. The user's score is the number of squares still left unturned.
 
-# Hints have been added to show the path to nearest diamond
+#### Hints have been added to show the path to nearest diamond
 
-# To start the Application:
+### To start the Application:
 Install the dependencies (via yarn install or npm install)
 Start the webserver: npm start
 Visit http://localhost:3000 to see the application
