@@ -13,6 +13,6 @@ Rules:
 #### Hints have been added to show the path to nearest diamond
 
 ### To start the Application:
-Install the dependencies (via yarn install or npm install)
-Start the webserver: npm start
-Visit http://localhost:3000 to see the application
+* Install the dependencies (via yarn install or npm install)
+* Start the webserver: npm start
+* Open http://localhost:3000 to see the application
