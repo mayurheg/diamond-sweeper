@@ -1,6 +1,6 @@
 # Diamond Sweeper Game
 
-Rules:
+### Rules:
 
 1. The game board has 8x8 squares (initially, all represented by question marks)
 2. There are 8 diamonds hidden on the board, each diamond behind one of the squares
